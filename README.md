@@ -1,4 +1,4 @@
-# .NET Core Domain Template
+# .NET 8 Domain Template (WORK IN PROGRESS)
 A sample .NET Core CRUD solution to be used as a template for new projects.
 
 # Features
