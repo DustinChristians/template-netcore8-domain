@@ -9,16 +9,14 @@ namespace CompanyName.ProjectName.Core.Models.Search
     {
         public SearchFieldMutator(Predicate<TSearch> condition, QueryMutator<TItem, TSearch> mutator)
         {
-            Condition = condition;
-            Mutator = mutator;
+            Condition = condition ?? throw new ArgumentNullException(nameof(condition));
+            Mutator = mutator ?? throw new ArgumentNullException(nameof(mutator));
         }
 
-        public Predicate<TSearch> Condition { get; set; }
-        public QueryMutator<TItem, TSearch> Mutator { get; set; }
+        public Predicate<TSearch> Condition { get; }
+        public QueryMutator<TItem, TSearch> Mutator { get; }
 
-        public IQueryable<TItem> Apply(TSearch search, IQueryable<TItem> query)
-        {
-            return Condition(search) ? Mutator(query, search) : query;
-        }
+        public IQueryable<TItem> Apply(TSearch search, IQueryable<TItem> query) =>
+            Condition(search) ? Mutator(query, search) : query;
     }
 }

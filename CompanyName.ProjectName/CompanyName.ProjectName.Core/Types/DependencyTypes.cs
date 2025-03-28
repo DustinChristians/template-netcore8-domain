@@ -13,7 +13,7 @@
         Singleton = 2,
 
         /// <summary>
-        /// created each time they are requested.
+        /// Created each time they are requested.
         /// </summary>
         Transient = 3
     }
