@@ -72,7 +72,8 @@ namespace CompanyName.ProjectName.WebApi.Controllers.Api
         [HttpOptions]
         public IActionResult GetUserCollectionsOptions()
         {
-            Response.Headers.Add("Allow", "GET, OPTIONS, POST");
+            Response.Headers.Allow = "GET, OPTIONS, POST";
+
             return Ok();
         }
     }

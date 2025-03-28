@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CompanyName.ProjectName.TestUtilities
 {
-    public class LogToActionLoggerProvider : ILoggerProvider
+    public sealed class LogToActionLoggerProvider : ILoggerProvider
     {
         private readonly Action<string> efCoreLogAction;
         private readonly LogLevel logLevel;
