@@ -72,7 +72,7 @@ namespace CompanyName.ProjectName.WebApi.Controllers
                 return NotFound();
             }
 
-            usersService.UsersRepository.DeleteAsync(user);
+            await usersService.UsersRepository.DeleteAsync(user);
             await usersService.UsersRepository.SaveChangesAsync();
 
             return NoContent();

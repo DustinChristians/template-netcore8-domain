@@ -23,13 +23,13 @@ namespace CompanyName.ProjectName.Core.Abstractions.Repositories
         Task<int> CountWhereAsync(Expression<Func<TDomainModel, bool>> predicate);
 
         Task CreateAsync(TDomainModel entity);
-        Task BulkCreateAsync(List<TDomainModel> entities);
+        Task BulkCreateAsync(IEnumerable<TDomainModel> entities);
 
-        void UpdateAsync(TDomainModel entity);
-        Task BulkUpdateAsync(List<TDomainModel> entities);
+        Task UpdateAsync(TDomainModel entity);
+        Task BulkUpdateAsync(IEnumerable<TDomainModel> entities);
 
-        void DeleteAsync(TDomainModel entity);
-        Task BulkDeleteAsync(List<TDomainModel> entities);
+        Task DeleteAsync(TDomainModel entity);
+        Task BulkDeleteAsync(IEnumerable<TDomainModel> entities);
 
         Task SaveChangesAsync();
     }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyName.ProjectName.Core", "CompanyName.ProjectName.Core\CompanyName.ProjectName.Core.csproj", "{1F118890-7539-47DE-AA24-FC94934ED9AA}"
 EndProject
@@ -22,6 +22,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyName.ProjectName.Scheduler", "CompanyName.ProjectName.Scheduler\CompanyName.ProjectName.Scheduler.csproj", "{D4776C10-7594-4D8B-BBB3-9F3937692E70}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyName.ProjectName.TestUtilities", "Tests\TestingUtilities\CompanyName.ProjectName.TestUtilities.csproj", "{BA9F241F-CE2B-4E67-9F90-1B78C694DEFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{39335199-A80E-43D1-AB2A-14B78E608762}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

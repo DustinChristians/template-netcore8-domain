@@ -10,10 +10,10 @@ namespace CompanyName.ProjectName.Mapping
     public class LoggerConfig
     {
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
-        .Build();
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
+            .Build();
 
         public static Serilog.ILogger CreateLogger()
         {
@@ -33,7 +33,7 @@ namespace CompanyName.ProjectName.Mapping
         public static void Configure(ILoggerFactory loggerFactory)
         {
             // Add Serilog to the Logging Pipeline
-            loggerFactory.AddSerilog();
+            loggerFactory.AddSerilog(dispose: true);
         }
     }
 }

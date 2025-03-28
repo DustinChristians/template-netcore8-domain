@@ -24,19 +24,11 @@ namespace CompanyName.ProjectName.Mapping
         // Add any Assembly Names that need to be scanned for AutoMapper Mapping Profiles here
         private static void ConfigureAutomapper(IServiceCollection services, string projectAssemblyName)
         {
-            var mappingConfig = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AddMaps(projectAssemblyName);
-                    cfg.AddMaps("CompanyName.ProjectName.Infrastructure");
-                    cfg.AddMaps("CompanyName.ProjectName.Repository");
-                    cfg.AddExpressionMapping();
-                    cfg.ConstructServicesUsing(
-                        type => ActivatorUtilities.CreateInstance(services.BuildServiceProvider(), type));
-                });
-
-            var mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddAutoMapper(
+                (serviceProvider, cfg) => cfg.AddExpressionMapping(),
+                Assembly.Load(projectAssemblyName),
+                Assembly.Load("CompanyName.ProjectName.Infrastructure"),
+                Assembly.Load("CompanyName.ProjectName.Repository"));
         }
 
         // The choice of seeding types used to get the exact assemblies is arbitrary as long as they

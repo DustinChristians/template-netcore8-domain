@@ -79,7 +79,7 @@ namespace CompanyName.ProjectName.WebApi.Controllers
 
             mapper.Map(updateMessage, message);
 
-            messagesService.MessagesRepository.UpdateAsync(message);
+            await messagesService.MessagesRepository.UpdateAsync(message);
 
             await messagesService.MessagesRepository.SaveChangesAsync();
 
@@ -105,7 +105,7 @@ namespace CompanyName.ProjectName.WebApi.Controllers
             }
 
             mapper.Map(messageToPatch, message);
-            messagesService.MessagesRepository.UpdateAsync(message);
+            await messagesService.MessagesRepository.UpdateAsync(message);
             await messagesService.MessagesRepository.SaveChangesAsync();
 
             return NoContent();
@@ -121,7 +121,7 @@ namespace CompanyName.ProjectName.WebApi.Controllers
                 return NotFound();
             }
 
-            messagesService.MessagesRepository.DeleteAsync(message);
+            await messagesService.MessagesRepository.DeleteAsync(message);
             await messagesService.MessagesRepository.SaveChangesAsync();
 
             return NoContent();
