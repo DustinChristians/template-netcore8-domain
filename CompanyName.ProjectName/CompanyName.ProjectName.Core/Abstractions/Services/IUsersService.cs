@@ -4,6 +4,6 @@ namespace CompanyName.ProjectName.Core.Abstractions.Services
 {
     public interface IUsersService
     {
-        public IUsersRepository UsersRepository { get; }
+        IUsersRepository UsersRepository { get; }
     }
 }
