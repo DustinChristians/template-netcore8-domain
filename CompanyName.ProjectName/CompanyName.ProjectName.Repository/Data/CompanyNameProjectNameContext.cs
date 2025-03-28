@@ -22,6 +22,8 @@ namespace CompanyName.ProjectName.Repository.Data
             modelBuilder.Entity<MessageEntity>().ToTable("Message");
             modelBuilder.Entity<SettingEntity>().ToTable("Setting");
             modelBuilder.Entity<UserEntity>().ToTable("User");
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

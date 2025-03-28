@@ -11,14 +11,23 @@ namespace CompanyName.ProjectName.Repository.Data
     {
         public static void Initialize(CompanyNameProjectNameContext context)
         {
-            Semaphore semaphoreObject = new Semaphore(initialCount: 1, maximumCount: 1, name: "Database Initialization");
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
 
-            // Only allow one startup project to create and seed the database if it doesn't exist.
-            // All other projects will wait here until the first startup project is finished so they
-            // don't move forward and try to access the database prematurely.
-            semaphoreObject.WaitOne();
-            InitializeDatabase(context);
-            semaphoreObject.Release();
+            using (var semaphore = new Semaphore(initialCount: 1, maximumCount: 1, name: "Database Initialization"))
+            {
+                semaphore.WaitOne();
+                try
+                {
+                    InitializeDatabase(context);
+                }
+                finally
+                {
+                    semaphore.Release();
+                }
+            }
         }
 
         private static void InitializeDatabase(CompanyNameProjectNameContext context)
@@ -29,20 +38,14 @@ namespace CompanyName.ProjectName.Repository.Data
             }
             catch (SqlException exception) when (exception.Number == 1801)
             {
-                // exception.Number 1801 = The database already exists
-
-                // It is preffered to avoid an excpetion but unfortunately Entity
-                // Framework doesn't offer a method to do that. CanConnect() and
-                // (context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists()
-                // both return false even if the database already exists right after it is created.
+                // Exception number 1801 indicates that the database already exists.
                 return;
             }
 
             System.Diagnostics.Debug.WriteLine("No Migrate Exception");
 
-            if (context?.Users != null && !context.Users.Any())
+            if (!context.Users.Any())
             {
-                // load test data into arrays rather than List<T> collections to optimize performance.
                 var users = new UserEntity[]
                 {
                     new UserEntity
@@ -53,9 +56,9 @@ namespace CompanyName.ProjectName.Repository.Data
                         IsActive = true,
                         Guid = Guid.NewGuid(),
                         CreatedBy = 1,
-                        CreatedOn = DateTimeOffset.Now,
+                        CreatedOn = DateTimeOffset.UtcNow,
                         ModifiedBy = 1,
-                        ModifiedOn = DateTimeOffset.Now
+                        ModifiedOn = DateTimeOffset.UtcNow
                     },
                     new UserEntity
                     {
@@ -65,21 +68,17 @@ namespace CompanyName.ProjectName.Repository.Data
                         IsActive = true,
                         Guid = Guid.NewGuid(),
                         CreatedBy = 1,
-                        CreatedOn = DateTimeOffset.Now,
+                        CreatedOn = DateTimeOffset.UtcNow,
                         ModifiedBy = 1,
-                        ModifiedOn = DateTimeOffset.Now
+                        ModifiedOn = DateTimeOffset.UtcNow
                     },
                 };
 
-                foreach (var user in users)
-                {
-                    context.Users.Add(user);
-                }
-
+                context.Users.AddRange(users);
                 context.SaveChanges();
             }
 
-            if (context?.Messages != null && !context.Messages.Any())
+            if (!context.Messages.Any())
             {
                 var messages = new MessageEntity[]
                 {
@@ -91,9 +90,9 @@ namespace CompanyName.ProjectName.Repository.Data
                         Guid = Guid.NewGuid(),
                         UserId = 1,
                         CreatedBy = 1,
-                        CreatedOn = DateTimeOffset.Now,
+                        CreatedOn = DateTimeOffset.UtcNow,
                         ModifiedBy = 1,
-                        ModifiedOn = DateTimeOffset.Now
+                        ModifiedOn = DateTimeOffset.UtcNow
                     },
                     new MessageEntity
                     {
@@ -103,17 +102,13 @@ namespace CompanyName.ProjectName.Repository.Data
                         Guid = Guid.NewGuid(),
                         UserId = 2,
                         CreatedBy = 1,
-                        CreatedOn = DateTimeOffset.Now,
+                        CreatedOn = DateTimeOffset.UtcNow,
                         ModifiedBy = 1,
-                        ModifiedOn = DateTimeOffset.Now
+                        ModifiedOn = DateTimeOffset.UtcNow
                     },
                 };
 
-                foreach (var message in messages)
-                {
-                    context.Messages.Add(message);
-                }
-
+                context.Messages.AddRange(messages);
                 context.SaveChanges();
             }
 
