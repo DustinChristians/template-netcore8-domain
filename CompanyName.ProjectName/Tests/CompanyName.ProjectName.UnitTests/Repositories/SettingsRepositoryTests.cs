@@ -37,7 +37,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 var value = await settingsRepository.GetSettingValue(key, defaultValue);
 
                 // Assert
-                Assert.AreEqual(value, defaultValue);
+                Assert.That(value, Is.EqualTo(defaultValue));
             }
         }
 
@@ -73,7 +73,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 var value = await settingsRepository.GetSettingValue("TestKey", string.Empty);
 
                 // Assert
-                Assert.AreEqual(value, testSetting.Value);
+                Assert.That(value, Is.EqualTo(testSetting.Value));
             }
         }
 
@@ -96,8 +96,8 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 var result = await settingsRepository.TryGetSettingValue<string>(key);
 
                 // Assert
-                Assert.AreEqual(result.Value, null);
-                Assert.AreEqual(result.Successful, false);
+                Assert.That(result.Value, Is.Null);
+                Assert.That(result.Successful, Is.False);
             }
         }
 
@@ -133,8 +133,8 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 var result = await settingsRepository.TryGetSettingValue<string>("TestKey");
 
                 // Assert
-                Assert.AreEqual(result.Value, testSetting.Value);
-                Assert.AreEqual(result.Successful, true);
+                Assert.That(result.Value, Is.EqualTo(testSetting.Value));
+                Assert.That(result.Successful, Is.True);
             }
         }
 

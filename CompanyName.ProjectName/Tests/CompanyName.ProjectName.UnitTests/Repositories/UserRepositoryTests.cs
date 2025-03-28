@@ -184,9 +184,9 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 var results = await usersRepository.GetUsersAsync(parameters);
 
                 // Assert
-                Assert.AreEqual(results.Count(), 2);
-                Assert.IsTrue(results.FirstOrDefault(x => x.Email == user1.Email) != null);
-                Assert.IsTrue(results.FirstOrDefault(x => x.Email == user2.Email) != null);
+                Assert.That(results.Count(), Is.EqualTo(2));
+                Assert.That(results.FirstOrDefault(x => x.Email == user1.Email), Is.Not.Null);
+                Assert.That(results.FirstOrDefault(x => x.Email == user2.Email), Is.Not.Null);
             }
         }
 
@@ -229,8 +229,8 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 var results = await usersRepository.GetUsersAsync(usersResourceParameters);
 
                 // Assert
-                Assert.AreEqual(results.Count(), 1);
-                Assert.IsTrue(results.FirstOrDefault(x => x.Email == user1.Email) != null);
+                Assert.That(results.Count(), Is.EqualTo(1));
+                Assert.That(results.FirstOrDefault(x => x.Email == user1.Email), Is.Not.Null);
             }
         }
 
@@ -273,7 +273,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 var results = await usersRepository.GetUsersAsync(usersResourceParameters);
 
                 // Assert
-                Assert.AreEqual(results.Count(), 0);
+                Assert.That(results.Count(), Is.EqualTo(0));
             }
         }
     }

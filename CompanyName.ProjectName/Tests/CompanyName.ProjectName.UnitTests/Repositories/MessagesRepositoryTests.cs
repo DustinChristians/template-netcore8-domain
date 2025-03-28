@@ -112,9 +112,9 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 var results = await messagesRepository.GetMessagesAsync(parameters);
 
                 // Assert
-                Assert.AreEqual(results.Count(), 2);
-                Assert.IsTrue(results.FirstOrDefault(x => x.Text == messageOne.Text) != null);
-                Assert.IsTrue(results.FirstOrDefault(x => x.Text == messageTwo.Text) != null);
+                Assert.That(results.Count(), Is.EqualTo(2));
+                Assert.That(results.FirstOrDefault(x => x.Text == messageOne.Text), Is.Not.Null);
+                Assert.That(results.FirstOrDefault(x => x.Text == messageTwo.Text), Is.Not.Null);
             }
         }
 
@@ -175,8 +175,8 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 var results = await messagesRepository.GetMessagesAsync(parameters);
 
                 // Assert
-                Assert.AreEqual(results.Count(), 1);
-                Assert.IsTrue(results.FirstOrDefault(x => x.Text == messageOne.Text) != null);
+                Assert.That(results.Count(), Is.EqualTo(1));
+                Assert.That(results.FirstOrDefault(x => x.Text == messageOne.Text), Is.Not.Null);
             }
         }
 
@@ -237,8 +237,8 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 var results = await messagesRepository.GetMessagesAsync(parameters);
 
                 // Assert
-                Assert.AreEqual(results.Count(), 1);
-                Assert.IsTrue(results.FirstOrDefault(x => x.Text == messageTwo.Text) != null);
+                Assert.That(results.Count(), Is.EqualTo(1));
+                Assert.That(results.FirstOrDefault(x => x.Text == messageTwo.Text), Is.Not.Null);
             }
         }
 
@@ -296,7 +296,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 var results = await messagesRepository.GetMessagesAsync(messagesResourceParameters);
 
                 // Assert
-                Assert.AreEqual(results.Count(), 0);
+                Assert.That(results.Count(), Is.EqualTo(0));
             }
         }
     }
