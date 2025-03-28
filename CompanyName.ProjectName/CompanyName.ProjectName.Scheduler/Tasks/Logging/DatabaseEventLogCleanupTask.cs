@@ -21,7 +21,7 @@ namespace CompanyName.ProjectName.Scheduler.Tasks.Logging
         {
             var days = configuration.GetValue<int>(ConfigurationKeys.DeleteDatabaseLogsOlderThanDays);
 
-            eventLogRepository.DeleteLogsOlderThanDateTime(DateTime.Now.AddDays(-days));
+            eventLogRepository.DeleteLogsOlderThanDateTimeOffset(DateTimeOffset.Now.AddDays(-days));
         }
     }
 }

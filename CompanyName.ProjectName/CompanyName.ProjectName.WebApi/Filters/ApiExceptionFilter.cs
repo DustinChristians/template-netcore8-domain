@@ -32,7 +32,7 @@ namespace CompanyName.ProjectName.WebApi.Filters
                 }
 
                 filterContext.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.InternalServerError;
-                filterContext.Result = new BadRequestObjectResult(new { message = "An error occurred. Please try again", currentDate = DateTime.Now });
+                filterContext.Result = new BadRequestObjectResult(new { message = "An error occurred. Please try again", currentDate = DateTimeOffset.Now });
                 filterContext.ExceptionHandled = true;
             }
         }

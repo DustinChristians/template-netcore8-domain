@@ -53,9 +53,9 @@ namespace CompanyName.ProjectName.Repository.Data
                         IsActive = true,
                         Guid = Guid.NewGuid(),
                         CreatedBy = 1,
-                        CreatedOn = DateTime.Now,
+                        CreatedOn = DateTimeOffset.Now,
                         ModifiedBy = 1,
-                        ModifiedOn = DateTime.Now
+                        ModifiedOn = DateTimeOffset.Now
                     },
                     new UserEntity
                     {
@@ -65,9 +65,9 @@ namespace CompanyName.ProjectName.Repository.Data
                         IsActive = true,
                         Guid = Guid.NewGuid(),
                         CreatedBy = 1,
-                        CreatedOn = DateTime.Now,
+                        CreatedOn = DateTimeOffset.Now,
                         ModifiedBy = 1,
-                        ModifiedOn = DateTime.Now
+                        ModifiedOn = DateTimeOffset.Now
                     },
                 };
 
@@ -91,9 +91,9 @@ namespace CompanyName.ProjectName.Repository.Data
                         Guid = Guid.NewGuid(),
                         UserId = 1,
                         CreatedBy = 1,
-                        CreatedOn = DateTime.Now,
+                        CreatedOn = DateTimeOffset.Now,
                         ModifiedBy = 1,
-                        ModifiedOn = DateTime.Now
+                        ModifiedOn = DateTimeOffset.Now
                     },
                     new MessageEntity
                     {
@@ -103,9 +103,9 @@ namespace CompanyName.ProjectName.Repository.Data
                         Guid = Guid.NewGuid(),
                         UserId = 2,
                         CreatedBy = 1,
-                        CreatedOn = DateTime.Now,
+                        CreatedOn = DateTimeOffset.Now,
                         ModifiedBy = 1,
-                        ModifiedOn = DateTime.Now
+                        ModifiedOn = DateTimeOffset.Now
                     },
                 };
 

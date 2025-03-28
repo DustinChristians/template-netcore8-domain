@@ -34,8 +34,8 @@ namespace CompanyName.ProjectName.Repository.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
@@ -46,8 +46,8 @@ namespace CompanyName.ProjectName.Repository.Migrations
                     b.Property<int>("ModifiedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("ModifiedOn")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
@@ -72,8 +72,8 @@ namespace CompanyName.ProjectName.Repository.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -94,8 +94,8 @@ namespace CompanyName.ProjectName.Repository.Migrations
                     b.Property<int>("ModifiedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("ModifiedOn")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 

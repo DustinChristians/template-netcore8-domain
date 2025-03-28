@@ -14,9 +14,9 @@ namespace CompanyName.ProjectName.Repository.Repositories.Logging
             this.context = context;
         }
 
-        public void DeleteLogsOlderThanDateTime(DateTime dateTime)
+        public void DeleteLogsOlderThanDateTimeOffset(DateTimeOffset datetimeoffset)
         {
-            context.Database.ExecuteSqlRaw("DELETE FROM EventLog WHERE TimeStamp < {0}", dateTime);
+            context.Database.ExecuteSqlRaw("DELETE FROM EventLog WHERE TimeStamp < {0}", datetimeoffset);
         }
     }
 }

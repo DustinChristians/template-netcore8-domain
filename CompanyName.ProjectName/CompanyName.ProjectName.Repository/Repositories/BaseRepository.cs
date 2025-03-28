@@ -153,15 +153,15 @@ namespace CompanyName.ProjectName.Repository.Repositories
         private void SetCreateMetadata(TEntity entity)
         {
             entity.CreatedBy = 0;
-            entity.CreatedOn = DateTime.UtcNow;
+            entity.CreatedOn = DateTimeOffset.UtcNow;
             entity.Guid = Guid.NewGuid();
             SetUpdateMetadata(entity, entity.CreatedOn);
         }
 
-        private void SetUpdateMetadata(TEntity entity, DateTime? modified = null)
+        private void SetUpdateMetadata(TEntity entity, DateTimeOffset? modified = null)
         {
             entity.ModifiedBy = 0;
-            entity.ModifiedOn = modified ?? DateTime.UtcNow;
+            entity.ModifiedOn = modified ?? DateTimeOffset.UtcNow;
         }
     }
 }
