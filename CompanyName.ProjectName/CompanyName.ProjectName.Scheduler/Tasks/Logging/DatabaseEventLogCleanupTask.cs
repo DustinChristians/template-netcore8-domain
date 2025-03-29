@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CompanyName.ProjectName.Core.Abstractions.Repositories.Logging;
 using CompanyName.ProjectName.Core.Abstractions.Tasks.Logging;
 using CompanyName.ProjectName.Scheduler.Constants;
@@ -17,11 +18,10 @@ namespace CompanyName.ProjectName.Scheduler.Tasks.Logging
             this.eventLogRepository = eventLogRepository;
         }
 
-        public void DeleteOldEventLogs()
+        public async Task DeleteOldEventLogsAsync()
         {
-            var days = configuration.GetValue<int>(ConfigurationKeys.DeleteDatabaseLogsOlderThanDays);
-
-            eventLogRepository.DeleteLogsOlderThanDateTimeOffset(DateTimeOffset.Now.AddDays(-days));
+            int days = configuration.GetValue<int>(ConfigurationKeys.DeleteDatabaseLogsOlderThanDays);
+            await eventLogRepository.DeleteLogsOlderThanDateTimeOffsetAsync(DateTimeOffset.Now.AddDays(-days));
         }
     }
 }

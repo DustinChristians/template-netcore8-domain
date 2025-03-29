@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CompanyName.ProjectName.Core.Abstractions.Repositories.Logging;
 using CompanyName.ProjectName.Repository.Data;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,9 @@ namespace CompanyName.ProjectName.Repository.Repositories.Logging
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void DeleteLogsOlderThanDateTimeOffset(DateTimeOffset datetimeoffset)
+        public Task DeleteLogsOlderThanDateTimeOffsetAsync(DateTimeOffset datetimeoffset)
         {
-            context.Database.ExecuteSqlRaw("DELETE FROM EventLog WHERE TimeStamp < {0}", datetimeoffset);
+            return context.Database.ExecuteSqlRawAsync("DELETE FROM EventLog WHERE TimeStamp < {0}", datetimeoffset);
         }
     }
 }

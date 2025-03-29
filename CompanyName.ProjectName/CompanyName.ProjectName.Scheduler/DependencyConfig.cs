@@ -17,7 +17,12 @@ namespace CompanyName.ProjectName.Scheduler
         // Register all tasks
         private static void AddDependenciesAutomatically(IServiceCollection services)
         {
-            DependencyUtility.RegisterInterfaces("Task", services, Assembly.GetAssembly(typeof(IDatabaseEventLogCleanupTask)), Assembly.GetAssembly(typeof(DatabaseEventLogCleanupTask)), DependencyTypes.Transient);
+            DependencyUtility.RegisterInterfaces(
+                "Task",
+                services,
+                typeof(IDatabaseEventLogCleanupTask).Assembly,
+                typeof(DatabaseEventLogCleanupTask).Assembly,
+                DependencyTypes.Transient);
         }
     }
 }

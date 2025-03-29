@@ -20,10 +20,10 @@ namespace CompanyName.ProjectName.Scheduler
 
         public void ScheduleRecurringTasks()
         {
-            RecurringJob.RemoveIfExists(nameof(DatabaseEventLogCleanupTask.DeleteOldEventLogs));
+            RecurringJob.RemoveIfExists(nameof(DatabaseEventLogCleanupTask.DeleteOldEventLogsAsync));
             RecurringJob.AddOrUpdate<IDatabaseEventLogCleanupTask>(
                 nameof(DatabaseEventLogCleanupTask),
-                task => task.DeleteOldEventLogs(),
+                task => task.DeleteOldEventLogsAsync(),
                 configuration.GetSection(ConfigurationKeys.DatabaseEventLogCleanupTaskCronExpression).Value);
 
             // Schedule more tasks here

@@ -1,7 +1,9 @@
-﻿namespace CompanyName.ProjectName.Core.Abstractions.Tasks.Logging
+﻿using System.Threading.Tasks;
+
+namespace CompanyName.ProjectName.Core.Abstractions.Tasks.Logging
 {
     public interface IDatabaseEventLogCleanupTask
     {
-        void DeleteOldEventLogs();
+        Task DeleteOldEventLogsAsync();
     }
 }

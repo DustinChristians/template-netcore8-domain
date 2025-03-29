@@ -1,47 +1,73 @@
 using System;
 using CompanyName.ProjectName.Mapping;
-using Microsoft.AspNetCore.Hosting;
+using CompanyName.ProjectName.Scheduler;
+using CompanyName.ProjectName.Scheduler.Abstractions;
+using Hangfire;
+using Hangfire.SqlServer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace CompanyName.ProjectName.Scheduler
-{
-    public class Program
+var builder = WebApplication.CreateBuilder(args);
+
+// Configure Serilog logger early.
+Log.Logger = LoggerConfig.CreateLogger();
+builder.Host.UseSerilog();
+
+// Add Hangfire services.
+builder.Services.AddHangfire(configuration => configuration
+    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+    .UseSimpleAssemblyNameTypeSerializer()
+    .UseRecommendedSerializerSettings()
+    .UseSqlServerStorage(builder.Configuration.GetConnectionString("CompanyName.ProjectName.Repository"), new SqlServerStorageOptions
     {
-        public static void Main(string[] args)
-        {
-            try
-            {
-                // Will create a file logger before the database exists
-                Log.Logger = LoggerConfig.CreateLogger();
+        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+        QueuePollInterval = TimeSpan.Zero,
+        UseRecommendedIsolationLevel = true,
+        DisableGlobalLocks = true
+    }));
 
-                Log.Information("Starting Up");
+// Add Hangfire server.
+builder.Services.AddHangfireServer();
 
-                var host = CreateHostBuilder(args).Build();
+// Register task scheduler.
+builder.Services.AddTransient<ITaskScheduler, TaskScheduler>();
 
-                DatabaseConfig.SeedDatabases(host);
+// Register shared dependencies (Mapping project) and scheduler tasks.
+CompanyName.ProjectName.Mapping.DependencyConfig.Register(builder.Services, builder.Configuration, System.Reflection.Assembly.GetEntryAssembly().GetName().Name);
+CompanyName.ProjectName.Scheduler.DependencyConfig.Register(builder.Services);
 
-                // Will create a database logger now that the database exists
-                Log.Logger = LoggerConfig.CreateLogger();
+var app = builder.Build();
 
-                host.Run();
-            }
-            catch (Exception exception)
-            {
-                Log.Fatal(exception, "Application start-up failed");
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
-        }
+// Seed databases (if necessary).
+DatabaseConfig.SeedDatabases(app);
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .UseSerilog()
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+// Configure middleware.
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+
+var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
+LoggerConfig.Configure(loggerFactory);
+
+app.UseHangfireDashboard();
+
+var taskScheduler = app.Services.GetRequiredService<ITaskScheduler>();
+taskScheduler.ScheduleRecurringTasks();
+
+app.UseRouting();
+
+// Recreate logger after database seeding if needed.
+Log.Logger = LoggerConfig.CreateLogger();
+
+Log.Information("Starting Up");
+
+app.Run();
+
+// Ensure proper shutdown of Serilog.
+Log.CloseAndFlush();

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace CompanyName.ProjectName.Core.Abstractions.Repositories.Logging
 {
     public interface IEventLogRepository
     {
-        void DeleteLogsOlderThanDateTimeOffset(DateTimeOffset datetimeoffset);
+        Task DeleteLogsOlderThanDateTimeOffsetAsync(DateTimeOffset datetimeoffset);
     }
 }
