@@ -38,12 +38,12 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
         }
 
         [Test]
-        public void GetMessagesAsync_NullParameters_ReturnsArgumentNullException()
+        public async Task GetMessagesAsync_NullParameters_ReturnsArgumentNullException()
         {
             // Arrange
             var options = DatabaseUtilities.GetTestDbConextOptions<CompanyNameProjectNameContext>();
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -79,7 +79,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 ChannelId = 1,
             };
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -89,7 +89,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await usersRepository.CreateAsync(user);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var messagesRepository = new MessagesRepository(context, MapperUtilities.GetTestMapper());
 
@@ -101,7 +101,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await messagesRepository.CreateAsync(messageTwo);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var messagesRepository = new MessagesRepository(context, MapperUtilities.GetTestMapper());
 
@@ -142,7 +142,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 ChannelId = 2,
             };
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -152,7 +152,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await usersRepository.CreateAsync(user);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var messagesRepository = new MessagesRepository(context, MapperUtilities.GetTestMapper());
 
@@ -164,7 +164,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await messagesRepository.CreateAsync(messageTwo);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var messagesRepository = new MessagesRepository(context, MapperUtilities.GetTestMapper());
 
@@ -204,7 +204,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 ChannelId = 2,
             };
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -214,7 +214,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await usersRepository.CreateAsync(user);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var messagesRepository = new MessagesRepository(context, MapperUtilities.GetTestMapper());
 
@@ -226,7 +226,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await messagesRepository.CreateAsync(messageTwo);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var messagesRepository = new MessagesRepository(context, MapperUtilities.GetTestMapper());
 
@@ -266,7 +266,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 ChannelId = 2,
             };
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -276,7 +276,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await usersRepository.CreateAsync(user);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var messagesRepository = new MessagesRepository(context, MapperUtilities.GetTestMapper());
 
@@ -288,7 +288,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await messagesRepository.CreateAsync(messageTwo);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var messagesRepository = new MessagesRepository(context, MapperUtilities.GetTestMapper());
 

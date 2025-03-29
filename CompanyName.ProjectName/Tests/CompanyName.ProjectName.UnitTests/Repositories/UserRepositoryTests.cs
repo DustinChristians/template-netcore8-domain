@@ -119,12 +119,12 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
         }
 
         [Test]
-        public void GetUsersAsync_NullParameters_ReturnsArgumentNullException()
+        public async Task GetUsersAsync_NullParameters_ReturnsArgumentNullException()
         {
             // Arrange
             var options = DatabaseUtilities.GetTestDbConextOptions<CompanyNameProjectNameContext>();
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -156,7 +156,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 LastName = "User2"
             };
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -167,7 +167,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await usersRepository.CreateAsync(user2);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var usersRepository = new UsersRepository(context, MapperUtilities.GetTestMapper());
 
@@ -210,7 +210,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 LastName = "User2"
             };
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -221,7 +221,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await usersRepository.CreateAsync(user2);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var usersRepository = new UsersRepository(context, MapperUtilities.GetTestMapper());
 
@@ -254,7 +254,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 LastName = "User2"
             };
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -265,7 +265,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await usersRepository.CreateAsync(user2);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var usersRepository = new UsersRepository(context, MapperUtilities.GetTestMapper());
 

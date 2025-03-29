@@ -26,7 +26,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
 
             var defaultValue = "default value";
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -56,7 +56,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 Description = "For Testing GetSettingValue"
             };
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -65,7 +65,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await settingsRepository.CreateAsync(testSetting);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var settingsRepository = new SettingsRepository(context, MapperUtilities.GetTestMapper());
 
@@ -85,7 +85,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
             // Arrange
             var options = DatabaseUtilities.GetTestDbConextOptions<CompanyNameProjectNameContext>();
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -116,7 +116,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 Description = "For Testing GetSettingValue"
             };
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
@@ -125,7 +125,7 @@ namespace CompanyName.ProjectName.UnitTests.Repositories
                 await settingsRepository.CreateAsync(testSetting);
             }
 
-            using (var context = new CompanyNameProjectNameContext(options))
+            await using (var context = new CompanyNameProjectNameContext(options))
             {
                 var settingsRepository = new SettingsRepository(context, MapperUtilities.GetTestMapper());
 

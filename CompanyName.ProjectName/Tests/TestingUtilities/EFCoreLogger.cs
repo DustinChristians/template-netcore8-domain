@@ -26,7 +26,22 @@ namespace CompanyName.ProjectName.TestUtilities
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            efCoreLogAction($"Log Level: {logLevel}, {state}");
+            if (!IsEnabled(logLevel))
+            {
+                return;
+            }
+
+            if (formatter == null)
+            {
+                throw new ArgumentNullException(nameof(formatter));
+            }
+
+            var message = formatter(state, exception);
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                efCoreLogAction($"Log Level: {logLevel}, {message}");
+            }
         }
     }
 }

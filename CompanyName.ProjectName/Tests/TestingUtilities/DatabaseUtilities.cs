@@ -17,11 +17,13 @@ namespace CompanyName.ProjectName.TestUtilities
             return new DbContextOptionsBuilder<TContext>()
                 // Log all Entity Framework Core information to
                 // the test log for easy troubleshooting
-                .UseLoggerFactory(new LoggerFactory(
-                    new[] { new LogToActionLoggerProvider((log) =>
+                .UseLoggerFactory(LoggerFactory.Create(builder =>
+                {
+                    builder.AddProvider(new LogToActionLoggerProvider((log) =>
                     {
                         TestContext.Out.WriteLine(log);
-                    }) }))
+                    }));
+                }))
                 .UseSqlite(connection)
                 .Options;
         }
