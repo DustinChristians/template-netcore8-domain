@@ -68,6 +68,7 @@ namespace CompanyName.ProjectName.Repository.Repositories.Settings
             }
 
             setting.Value = value.ToString();
+            await SaveChangesAsync();
 
             return true;
         }

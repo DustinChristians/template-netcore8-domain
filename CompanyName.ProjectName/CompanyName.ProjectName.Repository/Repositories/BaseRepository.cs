@@ -22,8 +22,8 @@ namespace CompanyName.ProjectName.Repository.Repositories
 
         public BaseRepository(CompanyNameProjectNameContext context, IMapper mapper)
         {
-            Context = context;
-            Mapper = mapper;
+            Context = context ?? throw new ArgumentNullException(nameof(context));
+            Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<bool> ExistsAsync(int id) => await GetByIdAsync(id) != null;
@@ -36,6 +36,11 @@ namespace CompanyName.ProjectName.Repository.Repositories
 
         public async Task<TDomainModel> FirstOrDefaultAsync(Expression<Func<TDomainModel, bool>> domainPredicate)
         {
+            if (domainPredicate == null)
+            {
+                throw new ArgumentNullException(nameof(domainPredicate));
+            }
+
             var entityPredicate = Mapper.Map<Expression<Func<TEntity, bool>>>(domainPredicate);
             var entity = await Context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(entityPredicate);
             return Mapper.Map<TDomainModel>(entity);
@@ -46,6 +51,11 @@ namespace CompanyName.ProjectName.Repository.Repositories
 
         public async Task<IEnumerable<TDomainModel>> GetWhereAsync(Expression<Func<TDomainModel, bool>> domainPredicate)
         {
+            if (domainPredicate == null)
+            {
+                throw new ArgumentNullException(nameof(domainPredicate));
+            }
+
             var entityPredicate = Mapper.Map<Expression<Func<TEntity, bool>>>(domainPredicate);
             var entities = await Context.Set<TEntity>().AsNoTracking().Where(entityPredicate).ToListAsync();
             return Mapper.Map<IEnumerable<TDomainModel>>(entities);
@@ -78,12 +88,22 @@ namespace CompanyName.ProjectName.Repository.Repositories
 
         public async Task<int> CountWhereAsync(Expression<Func<TDomainModel, bool>> domainPredicate)
         {
+            if (domainPredicate == null)
+            {
+                throw new ArgumentNullException(nameof(domainPredicate));
+            }
+
             var entityPredicate = Mapper.Map<Expression<Func<TEntity, bool>>>(domainPredicate);
             return await Context.Set<TEntity>().AsNoTracking().CountAsync(entityPredicate);
         }
 
         public async Task CreateAsync(TDomainModel domainModel)
         {
+            if (domainModel == null)
+            {
+                throw new ArgumentNullException(nameof(domainModel));
+            }
+
             var entity = Mapper.Map<TEntity>(domainModel);
             SetCreateMetadata(entity);
             await Context.Set<TEntity>().AddAsync(entity);
@@ -109,6 +129,11 @@ namespace CompanyName.ProjectName.Repository.Repositories
 
         public async Task UpdateAsync(TDomainModel domainModel)
         {
+            if (domainModel == null)
+            {
+                throw new ArgumentNullException(nameof(domainModel));
+            }
+
             var entity = Mapper.Map<TEntity>(domainModel);
             SetUpdateMetadata(entity);
             Context.Entry(entity).State = EntityState.Modified;
@@ -133,6 +158,11 @@ namespace CompanyName.ProjectName.Repository.Repositories
 
         public async Task DeleteAsync(TDomainModel domainModel)
         {
+            if (domainModel == null)
+            {
+                throw new ArgumentNullException(nameof(domainModel));
+            }
+
             Context.Set<TEntity>().Remove(Mapper.Map<TEntity>(domainModel));
             await SaveChangesAsync();
         }

@@ -11,7 +11,7 @@ namespace CompanyName.ProjectName.Repository.Repositories.Logging
 
         public EventLogRepository(CompanyNameProjectNameContext context)
         {
-            this.context = context;
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public void DeleteLogsOlderThanDateTimeOffset(DateTimeOffset datetimeoffset)

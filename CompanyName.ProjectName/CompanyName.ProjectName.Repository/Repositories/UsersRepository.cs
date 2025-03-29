@@ -24,7 +24,7 @@ namespace CompanyName.ProjectName.Repository.Repositories
         {
             if (parameters == null)
             {
-                throw new ArgumentNullException(nameof(UsersResourceParameters));
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             var userEntities = await Search()

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,11 +24,11 @@ namespace CompanyName.ProjectName.Repository.Repositories
         {
             if (parameters == null)
             {
-                throw new ArgumentNullException(nameof(MessagesResourceParameters));
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             var messageEntities = await Search()
-                .Apply(parameters, Context.Messages as IQueryable<MessageEntity>)
+                .Apply(parameters, Context.Messages)
                 .ToListAsync();
 
             return Mapper.Map<IEnumerable<Message>>(messageEntities);
