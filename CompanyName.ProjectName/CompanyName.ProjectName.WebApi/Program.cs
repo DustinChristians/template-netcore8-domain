@@ -109,13 +109,10 @@ app.UseRouting();
 app.UseAuthorization();
 
 // Marks the position in the middleware pipeline where the selected
-// endpoint is executed
-app.UseEndpoints(endpoints =>
-{
-    // Adds endpoints for our controller actions but no routes are specified
-    // For a Web API, use attributes at controller and action level: [Route], [HttpGet], ...
-    endpoints.MapControllers();
-});
+// endpoint is executed. Adds endpoints for our controller actions
+// but no routes are specified. For a Web API, use attributes at controller
+// and action level: [Route], [HttpGet], ...
+app.MapControllers();
 
 // Will create a database logger now that the database exists
 Log.Logger = LoggerConfig.CreateLogger();
