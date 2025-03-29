@@ -14,8 +14,8 @@ namespace CompanyName.ProjectName.Scheduler.Tasks.Logging
 
         public DatabaseEventLogCleanupTask(IConfiguration configuration, IEventLogRepository eventLogRepository)
         {
-            this.configuration = configuration;
-            this.eventLogRepository = eventLogRepository;
+            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            this.eventLogRepository = eventLogRepository ?? throw new ArgumentNullException(nameof(eventLogRepository));
         }
 
         public async Task DeleteOldEventLogsAsync()
