@@ -1,4 +1,3 @@
-using System;
 using CompanyName.ProjectName.Mapping;
 using CompanyName.ProjectName.WebApi.Filters;
 using Microsoft.AspNetCore.Builder;
@@ -11,11 +10,6 @@ using Newtonsoft.Json.Serialization;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Will create a file logger before the database exists
-Log.Logger = LoggerConfig.CreateLogger();
-
-Log.Information("Starting Up");
 
 // This method gets called by the runtime. Use this method to add services to the container.
 // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -59,11 +53,14 @@ builder.Services.AddScoped<ApiExceptionFilter>();
 
 // Register the shared dependencies in the Mapping project
 DependencyConfig.Register(builder.Services, builder.Configuration, System.Reflection.Assembly.GetEntryAssembly().GetName().Name);
-
 var app = builder.Build();
 
 // Call the database seeding logic.
 DatabaseConfig.SeedDatabases(app);
+
+// Will create a file logger before the database exists
+Log.Logger = LoggerConfig.CreateLogger();
+Log.Information("Starting Up");
 
 if (app.Environment.IsDevelopment())
 {
