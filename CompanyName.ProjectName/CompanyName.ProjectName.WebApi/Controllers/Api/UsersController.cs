@@ -5,6 +5,7 @@ using AutoMapper;
 using CompanyName.ProjectName.Core.Abstractions.Services;
 using CompanyName.ProjectName.Core.Models.Domain;
 using CompanyName.ProjectName.Core.Models.ResourceParameters;
+using CompanyName.ProjectName.Infrastructure.Services;
 using CompanyName.ProjectName.WebApi.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -22,7 +23,7 @@ namespace CompanyName.ProjectName.WebApi.Controllers
             IMapper mapper)
             : base(logger, mapper)
         {
-            this.usersService = usersService;
+            this.usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
         }
 
         [HttpGet]

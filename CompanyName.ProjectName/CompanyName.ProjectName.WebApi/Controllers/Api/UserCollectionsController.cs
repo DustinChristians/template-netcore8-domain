@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CompanyName.ProjectName.Core.Abstractions.Services;
 using CompanyName.ProjectName.Core.Models.Domain;
+using CompanyName.ProjectName.Infrastructure.Services;
 using CompanyName.ProjectName.WebApi.Models.User;
 using CompanyName.ProjectName.WebApi.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace CompanyName.ProjectName.WebApi.Controllers.Api
             IMapper mapper)
             : base(logger, mapper)
         {
-            this.usersService = usersService;
+            this.usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
         }
 
         [HttpGet("({guids})", Name = "GetUserCollection")]

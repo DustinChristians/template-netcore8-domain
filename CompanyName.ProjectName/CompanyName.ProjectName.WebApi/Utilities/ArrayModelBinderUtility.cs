@@ -1,9 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace CompanyName.ProjectName.WebApi.Utilities
 {
@@ -32,7 +33,7 @@ namespace CompanyName.ProjectName.WebApi.Utilities
             // The value isn't null or whitespace,
             // and the type of the model is enumerable.
             // Get the enumerable's type, and a converter
-            var elementType = bindingContext.ModelType.GetTypeInfo().GenericTypeArguments[0];
+            var elementType = bindingContext.ModelType.GenericTypeArguments[0];
             var converter = TypeDescriptor.GetConverter(elementType);
 
             // Convert each item in the value list to the enumerable type
@@ -45,7 +46,7 @@ namespace CompanyName.ProjectName.WebApi.Utilities
             values.CopyTo(typedValues, 0);
             bindingContext.Model = typedValues;
 
-            // return a successful result, passing in the Model
+            // Return a successful result, passing in the Model
             bindingContext.Result = ModelBindingResult.Success(bindingContext.Model);
             return Task.CompletedTask;
         }

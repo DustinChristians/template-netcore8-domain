@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
@@ -11,7 +12,7 @@ namespace CompanyName.ProjectName.WebApi.Filters
 
         public ApiExceptionFilter(ILogger<ApiExceptionFilter> logger)
         {
-            this.logger = logger;
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         /// <summary>
@@ -31,8 +32,12 @@ namespace CompanyName.ProjectName.WebApi.Filters
                     this.logger.LogError(filterContext.Exception, filterContext.Exception.Message);
                 }
 
-                filterContext.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.InternalServerError;
-                filterContext.Result = new BadRequestObjectResult(new { message = "An error occurred. Please try again", currentDate = DateTimeOffset.Now });
+                filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                filterContext.Result = new BadRequestObjectResult(new
+                {
+                    message = "An error occurred. Please try again",
+                    currentDate = DateTimeOffset.Now
+                });
                 filterContext.ExceptionHandled = true;
             }
         }

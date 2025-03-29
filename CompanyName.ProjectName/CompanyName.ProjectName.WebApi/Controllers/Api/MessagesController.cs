@@ -27,7 +27,7 @@ namespace CompanyName.ProjectName.WebApi.Controllers
             IMapper mapper)
             : base(logger, mapper)
         {
-            this.messagesService = messagesService;
+            this.messagesService = messagesService ?? throw new ArgumentNullException(nameof(messagesService));
         }
 
         [HttpGet]
