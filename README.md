@@ -20,7 +20,7 @@ A sample .NET 8 CRUD solution to be used as a template for new projects.
 
 ## Localhost Spinup Instructions
 - Clone this repository and open it in Visual Studio 2022.
-- You will need to download and install .NET 8 from Microsoft.
+- You will need to download and install .NET 8 from Microsoft if you don't already have it.
 - Set the WebApi project and Scheduler project as the startup projects. Right click the solution and select **properties**. Under **Common Properties** select **Startup Project** then **Multiple startup projects**. Set the **WebApi** project and **Scheduler** project to **Start**.
 - The database is a localdb, so once the project is run for the first time the local database will be created using Entity Framework code-first migrations and seeded with test data. 
 - Upon startup you will see all the seeded **message** data. A second tab will open and display the Hangfire Dashboard. There should be one recurring job for reducing the size of the database every five minutes.
