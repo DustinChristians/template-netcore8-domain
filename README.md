@@ -14,8 +14,9 @@ A sample .NET 8 CRUD solution to be used as a template for new projects.
 - NUnit tests for the existing messages, users and settings repositories. There are also unit tests for the Event Log Cleanup scheduled task.
 
 ## Creating a New Project from this Template
+- Before proceeding, make sure Visual Studio is closed. Then, follow the PowerShell script instructions below to automatically rename "CompanyName" and "ProjectName" to your chosen names.
 - Edit the RenameScript.ps1 PowerShell script and change the $a variable to CompanyName.ProjectName and the $b variable to YourCompanyName.YourProjectName to remame all directories, files and code instances of CompanyName.ProjectName to your CompanyName and your ProjectName. Do the same thing again for CompanyNameProjectName and YourCompanyNameYourProjectName.
-- To run the PowerShell script, open PowerShell, navigate to the directoty with the script and run the following command: `powershell.exe -executionpolicy bypass -file .\RenameScript.ps1`
+- To run the PowerShell script, open PowerShell, navigate to the directory with the script and run the following command: `powershell.exe -executionpolicy bypass -file .\RenameScript.ps1`
 
 ## Localhost Spinup Instructions
 - Clone this repository and open it in Visual Studio 2022.
@@ -23,6 +24,7 @@ A sample .NET 8 CRUD solution to be used as a template for new projects.
 - Set the WebApi project and Scheduler project as the startup projects. Right click the solution and select **properties**. Under **Common Properties** select **Startup Project** then **Multiple startup projects**. Set the **WebApi** project and **Scheduler** project to **Start**.
 - The database is a localdb, so once the project is run for the first time the local database will be created using Entity Framework code-first migrations and seeded with test data. 
 - Upon startup you will see all the seeded **message** data. A second tab will open and display the Hangfire Dashboard. There should be one recurring job for reducing the size of the database every five minutes.
+- ![image](https://github.com/user-attachments/assets/eb484df3-2c89-427d-9907-14e9742051b7)
 
 ## Projects
 
