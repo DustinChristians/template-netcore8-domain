@@ -1,4 +1,4 @@
-# .NET 8 Domain Template (WORK IN PROGRESS)
+# .NET 8 Domain Template
 A sample .NET 8 CRUD solution to be used as a template for new projects.
 
 # Features
