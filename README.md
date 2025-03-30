@@ -51,7 +51,8 @@ This repository uses Entity Framework Core and the Repository Pattern for CRUD o
 Running Code First Migrations:
 1. Open the **Package Manager Console** window in Visual Studio.
 2. Set the Default project at the top of the console window to: `CompanyName.ProjectName.Repository`
-3. Run the command: `Add-Migration NameOfYourMigration -startupproject CompanyName.ProjectName.WebApi`
+3. Run the command: `add-migration NameOfYourMigration -startupproject CompanyName.ProjectName.WebApi`
+4. The commands are simpler if you only have the WebApi set as the startup project. `add-migration NameOfYourMigration` etc.
 
 **Tests**
 Includes Integration and Unit testing projects and a TestUtilities project for sharing logging, in memory database dependencies and AutoMapper mocking between tests.  
