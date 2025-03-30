@@ -57,8 +57,11 @@ LoggerConfig.Configure(loggerFactory);
 
 app.UseHangfireDashboard();
 
-var taskScheduler = app.Services.GetRequiredService<ITaskScheduler>();
-taskScheduler.ScheduleRecurringTasks();
+using (var scope = app.Services.CreateScope())
+{
+    var taskScheduler = scope.ServiceProvider.GetRequiredService<ITaskScheduler>();
+    taskScheduler.ScheduleRecurringTasks();
+}
 
 app.UseRouting();
 
